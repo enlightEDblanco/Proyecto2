@@ -1,7 +1,4 @@
-let inputWords;
 let poema;
-let poemaFinal;
-let esPoema;
 let vocabulario01 = ["el amor", "el odio", "el pepe", "el portaavion", "el pensamiento", "la religión", "un script", "42", "el dolor", "el pepe"];
 let vocabulario02 = ["el coraje", "el maquinista", "el tren", "la soberbia", "los tíos"];
 let vocabulario03 = ["un perro", "un gorila", "un pepe", "un chorizo", "una langosta", "un camión"];
@@ -58,7 +55,7 @@ module.exports = {
     description: "Generar aleatoriamente una poesia",
     run: async (client, message, args) => {
 
-        if (args.length == 0) {
+        if (args.length == 0 || args.length > 4) {
             return message.channel.send("Utiliza !poesia vogon|español palabra1 palabra2 palabra3")
         }
 
