@@ -1,34 +1,16 @@
-let isUpdating = {}
 module.exports = {
     name: "poesia",
     aliases: ["poesia"],
     description: "Generar aleatoriamente una poesia",
     run: async (client, message, args) => {
 
-        message.channel.send('Hola')
-
-    
-        let palabras = []
-        let exit = false
-        isUpdating[message.guild.id] = true;
-
-        while (!exit) {
-
-            answer = await message.channel.awaitMessages((m => m.author.id === message.author.id), {
-                max: 1,
-                time: 120000,
-                errors: ['time']
-            }).catch(function () {
-                delete isUpdating[question.guild.id]
-                question.delete({timeout: 1000})
-                message.channel.send(emojis.clock + " Time's up! Please run the Commands again!").then(m => m.delete({timeout: 10000}))
-            });
-
-            console.log(answer)
-
-        }
-
+        let embed = new Discord.MessageEmbed()
+                .setColor(0x0099FF)
+                .setTimestamp()
+                .setTitle("Poesia")
+                .setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
         
+        return message.channel.send(embed)
 
     }
 }
