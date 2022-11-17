@@ -1,11 +1,27 @@
 console.time('startup');
 const {readdirSync} = require("fs");
+const chalk = require('chalk');
 
 (() => {
     process.on('uncaughtException', (err) => {
         console.error(err);
         process.exit(1);
     });
+
+    function intercept(stream, color) {
+        const write = stream.write;
+        stream.write = function () {
+            const args = [...arguments];
+            if (typeof args[0] == 'string') {
+                args[0] = `${color(`[${time}]`)} ${args[0]}`;
+            }
+            return write.apply(stream, args);
+        }
+    }
+
+    intercept(process.stdout, chalk.green);
+    intercept(process.stderr, chalk.red);
+
 })();
 
 require("dotenv").config();
