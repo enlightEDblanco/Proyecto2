@@ -58,23 +58,27 @@ module.exports = {
     description: "Generar aleatoriamente una poesia",
     run: async (client, message, args) => {
 
-        poema1 = getDatosVogon(args)
-        poema2 = getDatosVogon(args)
+        if (args.length == 0) {
+            return message.channel.send("Utiliza !poesia vogon|español palabra1 palabra2 palabra3")
+        }
 
-        let embed1 = new Discord.MessageEmbed()
-            .setColor(0x0099FF)
-            .setTimestamp()
-            .setTitle("Aqui tienes tu poesia en Vogon")
-            .setDescription(poema1)
+        if (args[0].toLowerCase() == "vogon") {
+            tipo = "Vogon"
+            poema = getDatosVogon(args)
+        } else if (args[0].toLowerCase() == "español") {
+            tipo = "Español"
+            poema = getDatosSpain(args)
+        } else {
+            return message.channel.send("Utiliza !poesia vogon|español palabra1 palabra2 palabra3")
+        }
 
-        let embed2 = new Discord.MessageEmbed()
+        let embed = new Discord.MessageEmbed()
         .setColor(0x0099FF)
         .setTimestamp()
-        .setTitle("Aqui tienes tu poesia en Español")
-        .setDescription(poema2)
+        .setTitle("Aqui tienes tu poesia en " + tipo + "!!!")
+        .setDescription(poema)
 
-        message.channel.send(embed1)
-        message.channel.send(embed2)
+        message.channel.send(embed)
         return
 
     }
